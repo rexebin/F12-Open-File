@@ -29,6 +29,10 @@ Default configuration:
 
 ## Release Notes
 
+### 0.0.2
+
+Fix MacOS path invalid bug.
+
 ### 0.0.1
 
 Initial release.

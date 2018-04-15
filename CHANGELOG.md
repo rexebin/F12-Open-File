@@ -4,7 +4,11 @@ All notable changes to the **F12: Open File** extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [0.01]
+## 0.0.2
+
+Fix: Path not processing correctly on MacOS
+
+## 0.01
 
 * Initial release
 
