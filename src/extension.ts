@@ -71,8 +71,15 @@ function _openFile(targetFile: string): Promise<vscode.TextDocument> {
   });
 }
 function _getAbsolutePath(base: string, relative: string) {
-  let stack = base.split("\\"),
-    parts = relative.split("/");
+  let stack = [];
+  let isWindows = false;
+  if (base.indexOf("\\") !== -1) {
+    stack = base.split("\\");
+    isWindows = true;
+  } else {
+    stack = base.split("/");
+  }
+  let parts = relative.split("/");
   stack.pop();
   for (let i = 0; i < parts.length; i++) {
     if (parts[i] === ".") {
@@ -84,7 +91,10 @@ function _getAbsolutePath(base: string, relative: string) {
       stack.push(parts[i]);
     }
   }
-  return stack.join("\\");
+  if (isWindows) {
+    return stack.join("\\");
+  }
+  return stack.join("/");
 }
 class OpenRelativeFileDefinitionProvider implements vscode.DefinitionProvider {
   public provideDefinition(
