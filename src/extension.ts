@@ -3,6 +3,10 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+let isSplit = vscode.workspace
+  .getConfiguration("openFile")
+  .get<boolean>("openSideBySide");
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -10,20 +14,18 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.languages.registerDefinitionProvider(
       { language: "typescript", scheme: "file" },
       new OpenRelativeFileDefinitionProvider()
-    )
+    ),
+
+    vscode.workspace.onDidChangeConfiguration(() => {
+      isSplit = vscode.workspace
+        .getConfiguration("openFile")
+        .get("openSideBySide");
+    })
   );
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-
-let isSplit = vscode.workspace
-  .getConfiguration("openFile")
-  .get<boolean>("openSideBySide");
-
-vscode.workspace.onDidChangeConfiguration(() => {
-  isSplit = vscode.workspace.getConfiguration("openFile").get("openSideBySide");
-});
 
 function _openFile(targetFile: string): Promise<vscode.TextDocument> {
   return new Promise((resolve, reject) => {
@@ -104,7 +106,7 @@ class OpenRelativeFileDefinitionProvider implements vscode.DefinitionProvider {
   ): Thenable<vscode.Location> {
     return new Promise((resolve, reject) => {
       const text = document.lineAt(position).text;
-      const indexOfWord = position.character;
+      const indexOfCursor = position.character;
       let fileName = "";
       if (/(?:"|')/.test(text)) {
         let stack = text.match(/(?:'|")(.*?)(?:'|")/g);
@@ -112,7 +114,7 @@ class OpenRelativeFileDefinitionProvider implements vscode.DefinitionProvider {
           stack.forEach(string => {
             const start = text.indexOf(string);
             const end = start + string.length;
-            if (indexOfWord >= start && indexOfWord <= end) {
+            if (indexOfCursor >= start && indexOfCursor <= end) {
               fileName = string;
             }
           });

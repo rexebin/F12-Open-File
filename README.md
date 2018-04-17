@@ -27,14 +27,4 @@ Default configuration:
 1.  Only works with **relative** paths with full file name and extensions
 1.  Supported file extensions: html, scss, less, ts, sass, js, json, md, jsx
 
-## Release Notes
-
-### 0.0.2
-
-Fix MacOS path invalid bug.
-
-### 0.0.1
-
-Initial release.
-
 [Source code](https://github.com/rexebin/F12-Open-File)

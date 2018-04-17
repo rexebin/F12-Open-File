@@ -4,6 +4,11 @@ All notable changes to the **F12: Open File** extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.3
+
+1.  Fix: `onDidChangeConfiguration` listener is now disposable.
+2.  only activate with Typescript files.
+
 ## 0.0.2
 
 Fix: Path not processing correctly on MacOS
