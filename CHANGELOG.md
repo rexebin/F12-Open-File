@@ -4,6 +4,10 @@ All notable changes to the **F12: Open File** extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.4
+
+Add Icon and improve readme.
+
 ## 0.0.3
 
 1.  Fix: `onDidChangeConfiguration` listener is now disposable.
