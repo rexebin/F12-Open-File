@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.0
+
+1.  Now support all files types.
+2.  Now resolve definition properly so "No Definition" tooltip doesn't appear.
+
 ## 0.0.4
 
 Add Icon and improve readme.

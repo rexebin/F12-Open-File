@@ -122,33 +122,15 @@ class OpenRelativeFileDefinitionProvider implements vscode.DefinitionProvider {
       }
       fileName = fileName.replace(/['"]+/g, "");
       if (!fileName || !fileName.startsWith(".")) {
-        reject();
-        return;
-      }
-
-      const supportedExtensions = [
-        "html",
-        "scss",
-        "less",
-        "ts",
-        "sass",
-        "js",
-        "json",
-        "md",
-        "jsx"
-      ];
-
-      const extension = fileName.split(".").pop();
-      if (extension && supportedExtensions.indexOf(extension) === -1) {
-        reject();
+        reject("Invalid path");
         return;
       }
 
       const targetFile = _getAbsolutePath(document.fileName, fileName);
 
       _openFile(targetFile).then(
-        () => {
-          resolve();
+        doc => {
+          resolve(new vscode.Location(doc.uri, new vscode.Position(0, 0)));
         },
         err => {
           reject(err);
