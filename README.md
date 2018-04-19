@@ -33,4 +33,4 @@ Default configuration:
 
 [Source code](https://github.com/rexebin/F12-Open-File)
 
-[VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=rexebin.f12-open-file)
+[Install "F12: Open File" from VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=rexebin.f12-open-file)
