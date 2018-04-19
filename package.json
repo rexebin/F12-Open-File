@@ -11,7 +11,7 @@
   "engines": {
     "vscode": "^1.22.0"
   },
-  "icon": "./f12.png",
+  "icon": "f12.png",
   "categories": ["Languages", "Other"],
   "activationEvents": ["onLanguage:typescript"],
   "main": "./out/extension",
