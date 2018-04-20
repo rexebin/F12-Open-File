@@ -1,4 +1,13 @@
-import { CancellationToken, DefinitionProvider, Location, Position, TextDocument, ViewColumn, window, workspace } from "vscode";
+import {
+  CancellationToken,
+  DefinitionProvider,
+  Location,
+  Position,
+  TextDocument,
+  ViewColumn,
+  window,
+  workspace
+} from "vscode";
 import { Config } from "./config";
 /**
  * Definition Provider for the extension.
@@ -12,37 +21,41 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
     return this.provideOpenFileDefinition(document, position);
   }
 
-  async provideOpenFileDefinition(document: TextDocument,
-    position: Position): Promise<Location> {
+  async provideOpenFileDefinition(
+    document: TextDocument,
+    position: Position
+  ): Promise<Location> {
     try {
       const fileName = this._getRelativePath(document, position);
       if (fileName === "") {
-        throw new Error('File not valid');
+        throw new Error("File not valid");
       }
       const targetFile = this._getAbsolutePath(document.fileName, fileName);
-      const doc = await workspace.openTextDocument(targetFile)
+      const doc = await workspace.openTextDocument(targetFile);
       const result = await window
         .showTextDocument(
           doc,
           Config.isSplit ? ViewColumn.Two : ViewColumn.Active
         )
-        .then(() => {
-          return new Location(doc.uri, new Position(0, 0));
-        }, error => {
-          console.log(error);
-        });
+        .then(
+          () => {
+            return new Location(doc.uri, new Position(0, 0));
+          },
+          error => {
+            console.log(error);
+          }
+        );
       return result;
     } catch (error) {
       return error;
     }
   }
 
-
   /**
    * Get a valid relative path from given document and position.
    * @param document current text document
    * @param position current cursor position
-   * 
+   *
    * @returns a valid relative path or empty string
    */
   _getRelativePath(document: TextDocument, position: Position): string {
@@ -72,8 +85,8 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
    * Get absolute path of a relative path from a base path.
    * @param baseAbsolutePath base path on which a new path will be computing on
    * @param relativePath relative path to the above base path
-   * 
-   * @returns a new absolute path of the given relative path. 
+   *
+   * @returns a new absolute path of the given relative path.
    */
   _getAbsolutePath(baseAbsolutePath: string, relativePath: string) {
     let stack = [];
