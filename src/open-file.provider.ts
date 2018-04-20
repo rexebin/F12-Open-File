@@ -9,28 +9,34 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
     position: Position,
     token: CancellationToken
   ): Thenable<Location> {
-    return new Promise((resolve, reject) => {
+    return this.provideOpenFileDefinition(document, position);
+  }
+
+  async provideOpenFileDefinition(document: TextDocument,
+    position: Position): Promise<Location> {
+    try {
       const fileName = this._getRelativePath(document, position);
       if (fileName === "") {
-        reject("File not found");
+        throw new Error('File not valid');
       }
       const targetFile = this._getAbsolutePath(document.fileName, fileName);
-      try {
-        workspace.openTextDocument(targetFile).then(doc => {
-          window
-            .showTextDocument(
-              doc,
-              Config.isSplit ? ViewColumn.Two : ViewColumn.Active
-            )
-            .then(() => {
-              resolve(new Location(doc.uri, new Position(0, 0)));
-            });
+      const doc = await workspace.openTextDocument(targetFile)
+      const result = await window
+        .showTextDocument(
+          doc,
+          Config.isSplit ? ViewColumn.Two : ViewColumn.Active
+        )
+        .then(() => {
+          return new Location(doc.uri, new Position(0, 0));
+        }, error => {
+          console.log(error);
         });
-      } catch (error) {
-        reject(error);
-      }
-    });
+      return result;
+    } catch (error) {
+      return error;
+    }
   }
+
 
   /**
    * Get a valid relative path from given document and position.

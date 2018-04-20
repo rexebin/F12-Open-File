@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.2.x
+
+Fix： Remove "Promise has no error" warning.
+Fix:  Does not do anything if file name is invalid.
+
 ## 0.1.0
 
 1.  Now support all files types.
