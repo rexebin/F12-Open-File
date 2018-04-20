@@ -1,9 +1,8 @@
 {
   "name": "f12-open-file",
   "displayName": "F12: Open File",
-  "description":
-    "Extending Typescript Go to definition to open file when the look up symbol is a file name with relative path.",
-  "version": "0.1.3",
+  "description": "Extending Typescript Go to definition to open file when the look up symbol is a file name with relative path.",
+  "version": "0.1.4",
   "publisher": "rexebin",
   "repository": {
     "url": "https://github.com/rexebin/F12-Open-File"
@@ -12,8 +11,13 @@
     "vscode": "^1.22.0"
   },
   "icon": "f12.png",
-  "categories": ["Languages", "Other"],
-  "activationEvents": ["*"],
+  "categories": [
+    "Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./out/extension",
   "contributes": {
     "configuration": {
