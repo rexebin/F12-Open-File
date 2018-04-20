@@ -1,7 +1,7 @@
 {
   "name": "f12-open-file",
   "displayName": "F12: Open File",
-  "description": "Extending Typescript Go to definition to open file when the look up symbol is a file name with relative path.",
+  "description": "Extending Go to definition to open file when the look up symbol is a file name with relative path.",
   "version": "0.1.4",
   "publisher": "rexebin",
   "repository": {
@@ -17,6 +17,13 @@
   ],
   "activationEvents": [
     "*"
+  ],
+  "keywords": [
+    "definition",
+    "angular",
+    "typescript",
+    "javascript",
+    "file"
   ],
   "main": "./out/extension",
   "contributes": {
