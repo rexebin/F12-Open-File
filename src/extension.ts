@@ -12,7 +12,7 @@ let isSplit = vscode.workspace
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.languages.registerDefinitionProvider(
-      { language: "typescript", scheme: "file" },
+      { language: "*", scheme: "file" },
       new OpenRelativeFileDefinitionProvider()
     ),
 
