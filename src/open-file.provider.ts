@@ -4,11 +4,8 @@ import {
   Location,
   Position,
   TextDocument,
-  ViewColumn,
-  window,
   workspace
 } from "vscode";
-import { Config } from "./config";
 /**
  * Definition Provider for the extension.
  */
@@ -31,21 +28,9 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
         throw new Error("File not valid");
       }
       const targetFile = this._getAbsolutePath(document.fileName, fileName);
+
       const doc = await workspace.openTextDocument(targetFile);
-      const result = await window
-        .showTextDocument(
-          doc,
-          Config.isSplit ? ViewColumn.Two : ViewColumn.Active
-        )
-        .then(
-          () => {
-            return new Location(doc.uri, new Position(0, 0));
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      return result;
+      return new Location(doc.uri, new Position(0, 0));
     } catch (error) {
       return error;
     }

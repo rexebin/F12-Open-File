@@ -10,11 +10,7 @@ Use case: open Angular's `templateUrl` and `styleUrls` at a key stroke: F12 when
 
 1.  move cursor to file name string in any file. A file name must be a string with single or double quote with relative path and file extension.
 2.  press F12 to open.
-3.  File is opened side by side. Add the following configration to `User Settings` to open in new tab:
-
-```
-"openFile.openSideBySide": false
-```
+3.  CMD/CTRL + Click to open, or CMD/CTRL + ALT + Click to open side by side.
 
 Note: Only works with **relative** paths with full file name and extensions
 

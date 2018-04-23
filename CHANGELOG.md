@@ -1,9 +1,18 @@
 # Change Log
 
+## 0.3.x
+
+Fix: Remove the side by side option. Will now behave as other Go To Definition:
+
+1.  F12
+2.  Right click -> Go to Definition
+3.  CMD/CTRL + Click: open in same preview tab or next to normal tab.
+4.  CMD/CTRL + ALT + Click: open side by side
+
 ## 0.2.x
 
 Fix： Remove "Promise has no error" warning.
-Fix:  Does not do anything if file name is invalid.
+Fix: Does not do anything if file name is invalid.
 
 ## 0.1.0
 
