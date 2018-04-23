@@ -3,7 +3,7 @@
   "displayName": "F12: Open File",
   "description":
     "Extending Go to definition to open file when the look up symbol is a file name with relative path.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "rexebin",
   "repository": {
     "url": "https://github.com/rexebin/F12-Open-File"
@@ -16,18 +16,6 @@
   "activationEvents": ["*"],
   "keywords": ["definition", "angular", "typescript", "javascript", "file"],
   "main": "./out/extension",
-  "contributes": {
-    "configuration": {
-      "title": "Side by side",
-      "properties": {
-        "openFile.openSideBySide": {
-          "type": "boolean",
-          "default": true,
-          "description": "Open files side by side to the Typescript file."
-        }
-      }
-    }
-  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
