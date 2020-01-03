@@ -1,9 +1,8 @@
 {
   "name": "f12-open-file",
   "displayName": "F12: Open File",
-  "description":
-    "Extending Go to definition to open file when the look up symbol is a file name with relative path.",
-  "version": "0.3.1",
+  "description": "Extending Go to definition to open file when the look up symbol is a file name with relative path.",
+  "version": "0.3.2",
   "publisher": "rexebin",
   "repository": {
     "url": "https://github.com/rexebin/F12-Open-File"
@@ -12,9 +11,20 @@
     "vscode": "^1.22.0"
   },
   "icon": "f12.png",
-  "categories": ["Languages", "Other"],
-  "activationEvents": ["*"],
-  "keywords": ["definition", "angular", "typescript", "javascript", "file"],
+  "categories": [
+    "Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "keywords": [
+    "definition",
+    "angular",
+    "typescript",
+    "javascript",
+    "file"
+  ],
   "main": "./out/extension",
   "scripts": {
     "vscode:prepublish": "npm run compile",

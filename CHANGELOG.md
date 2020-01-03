@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.2
+
+Fix error for new version of vscode.
+
 ## 0.3.x
 
 Fix: Remove the side by side option. Will now behave as other Go To Definition:
@@ -34,7 +38,7 @@ Fix: Path not processing correctly on MacOS
 
 ## 0.01
 
-* Initial release
+- Initial release
 
 1.  this extension is an Typescript Definition Provider, which means it only react to 'Go to Definition' or F12 in a Typescript file.
 2.  supported file types: html, scss, less, ts, sass, js, json, md, jsx. It does not do anything if the extension is not supported.

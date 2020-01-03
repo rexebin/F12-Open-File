@@ -5,7 +5,7 @@ import {
   Position,
   TextDocument,
   workspace
-} from "vscode";
+} from 'vscode';
 /**
  * Definition Provider for the extension.
  */
@@ -14,26 +14,22 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
     document: TextDocument,
     position: Position,
     token: CancellationToken
-  ): Thenable<Location> {
+  ): Thenable<Location[]> {
     return this.provideOpenFileDefinition(document, position);
   }
 
   async provideOpenFileDefinition(
     document: TextDocument,
     position: Position
-  ): Promise<Location> {
-    try {
-      const fileName = this._getRelativePath(document, position);
-      if (fileName === "") {
-        throw new Error("File not valid");
-      }
-      const targetFile = this._getAbsolutePath(document.fileName, fileName);
-
-      const doc = await workspace.openTextDocument(targetFile);
-      return new Location(doc.uri, new Position(0, 0));
-    } catch (error) {
-      return error;
+  ): Promise<Location[]> {
+    const fileName = this._getRelativePath(document, position);
+    if (fileName === '') {
+      return [];
     }
+    const targetFile = this._getAbsolutePath(document.fileName, fileName);
+
+    const doc = await workspace.openTextDocument(targetFile);
+    return [new Location(doc.uri, new Position(0, 0))];
   }
 
   /**
@@ -46,7 +42,7 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
   _getRelativePath(document: TextDocument, position: Position): string {
     const text = document.lineAt(position).text;
     const indexOfCursor = position.character;
-    let relativePath = "";
+    let relativePath = '';
     if (/(?:"|')/.test(text)) {
       let stack = text.match(/(?:'|")(.*?)(?:'|")/g);
       if (stack) {
@@ -59,9 +55,9 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
         });
       }
     }
-    relativePath = relativePath.replace(/['"]+/g, "");
-    if (!relativePath || !relativePath.startsWith(".")) {
-      return "";
+    relativePath = relativePath.replace(/['"]+/g, '');
+    if (!relativePath || !relativePath.startsWith('.')) {
+      return '';
     }
     return relativePath;
   }
@@ -76,27 +72,27 @@ export class OpenRelativeFileDefinitionProvider implements DefinitionProvider {
   _getAbsolutePath(baseAbsolutePath: string, relativePath: string) {
     let stack = [];
     let isWindows = false;
-    if (baseAbsolutePath.indexOf("\\") !== -1) {
-      stack = baseAbsolutePath.split("\\");
+    if (baseAbsolutePath.indexOf('\\') !== -1) {
+      stack = baseAbsolutePath.split('\\');
       isWindows = true;
     } else {
-      stack = baseAbsolutePath.split("/");
+      stack = baseAbsolutePath.split('/');
     }
-    let parts = relativePath.split("/");
+    let parts = relativePath.split('/');
     stack.pop();
     for (let i = 0; i < parts.length; i++) {
-      if (parts[i] === ".") {
+      if (parts[i] === '.') {
         continue;
       }
-      if (parts[i] === "..") {
+      if (parts[i] === '..') {
         stack.pop();
       } else {
         stack.push(parts[i]);
       }
     }
     if (isWindows) {
-      return stack.join("\\");
+      return stack.join('\\');
     }
-    return stack.join("/");
+    return stack.join('/');
   }
 }
